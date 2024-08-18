@@ -7,7 +7,7 @@ import useMount from "./useMount";
 
 interface IOptions {
     params: Record<string, string>;
-    manual?: Boolean;
+    manual?: boolean;
     onSuccess?: (res: unknown) => void;// 用于异步请求
     onError?: (res: unknown) => void;
 }
@@ -27,10 +27,14 @@ const useRequest = (
         service(curParams).then((res) => {
             setData(res);
             setLoading(false);
-            options.onSuccess && options.onSuccess(res);
+            if (options.onSuccess) {
+                options.onSuccess(res);
+            }
         }).catch((error) => {
             setLoading(false);
-            options.onError && options.onError(error);
+            if (options.onError) {
+                options.onError(error);
+            }
         })
     }, [service])
 
