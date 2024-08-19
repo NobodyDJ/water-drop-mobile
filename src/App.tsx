@@ -1,33 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useQuery, useMutation } from '@apollo/client'
+import { FIND, UPDATE } from './graphql/demo'
+// import React, { useState } from 'react'
+import { Button, Form, Input } from 'antd-mobile';
+import { useEffect } from 'react';
+
+interface IValue {
+  name?: string;
+  desc?: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const { loading, data } = useQuery(FIND, {
+    variables: {
+      id: '16196544-9921-4514-9c12-b3f3d163289b'
+    }
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-prefers-color-scheme',
+      'dark'
+    )
+  }, [])
+
+  // 更新
+  const [update] = useMutation(UPDATE);
+
+  // 发送更新请求
+  const onClickHandler = (v: IValue) => {
+    update({
+      variables: {
+        id: '16196544-9921-4514-9c12-b3f3d163289b',
+        params: {
+          ...v
+        }
+      }
+    })
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <p>
+        data:
+        { JSON.stringify(data) }
       </p>
+      <p>
+        loading:
+        { `${loading}` }
+      </p>
+      <Form
+        layout="horizontal"
+        onFinish={onClickHandler}
+        footer={(
+          <Button block type="submit" color="primary" size="large">
+            提交
+          </Button>
+        )}
+      >
+        <Form.Item name="name" label="姓名">
+          <Input/>
+        </Form.Item>
+        <Form.Item name="desc" label="描述">
+          <Input/>
+        </Form.Item>
+      </Form>
     </>
   )
 }

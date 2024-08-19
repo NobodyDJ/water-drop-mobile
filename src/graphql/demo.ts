@@ -9,4 +9,11 @@ query find($id: String!){
         id
     }
 }
-`
+`;
+
+// 更新
+export const UPDATE = gql`
+mutation update($id: String!, $params: UserInput!){
+    update(id: $id, params: $params)
+}
+`;
