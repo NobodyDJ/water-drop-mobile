@@ -1,9 +1,11 @@
-import './App.css'
 import { useQuery, useMutation } from '@apollo/client'
 import { FIND, UPDATE } from './graphql/demo'
 // import React, { useState } from 'react'
-import { Button, Form, Input } from 'antd-mobile';
+import { Button, Form, ImageUploader, Input } from 'antd-mobile';
 import { useEffect } from 'react';
+import { useUploadOSS } from './hooks/useUpload';
+import styles from './App.module.less'
+import classNames from 'classnames';
 
 interface IValue {
   name?: string;
@@ -11,7 +13,7 @@ interface IValue {
 }
 
 function App() {
-
+  const uploadHandler =  useUploadOSS();
   const { loading, data } = useQuery(FIND, {
     variables: {
       id: '16196544-9921-4514-9c12-b3f3d163289b'
@@ -50,6 +52,7 @@ function App() {
         { `${loading}` }
       </p>
       <Form
+        className={styles.container}
         layout="horizontal"
         onFinish={onClickHandler}
         footer={(
@@ -58,11 +61,14 @@ function App() {
           </Button>
         )}
       >
-        <Form.Item name="name" label="姓名">
+        <Form.Item name="name" label="姓名" className={classNames(styles.formBorder, styles.formPadding)}>
           <Input/>
         </Form.Item>
         <Form.Item name="desc" label="描述">
           <Input/>
+        </Form.Item>
+        <Form.Item name="avatar" label="头像">
+        <ImageUploader upload={uploadHandler}/>
         </Form.Item>
       </Form>
     </>
