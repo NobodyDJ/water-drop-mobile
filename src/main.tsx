@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
   // 类似于useContext可以让请求的域名不再重复写了
   <ConfigProvider locale={zhCN}>
     <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+      <App />
+    </ApolloProvider>
   </ConfigProvider>
 )
