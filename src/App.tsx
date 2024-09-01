@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.module.less'
 import { ROUTE_CONFIG } from './routes'
 
-
 function App() {
   return (
     <BrowserRouter>
