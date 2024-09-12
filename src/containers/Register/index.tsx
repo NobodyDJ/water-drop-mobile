@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import {
     Form,
     Input,
@@ -22,14 +20,10 @@ interface IValue{
 }
 
 const Register = () => {
-    const [state, setState] = useState();
     const [form] = Form.useForm();
     const nav = useNavigate();
     // 参数1执行突变，参数2选项如error loading data
     const [register] = useMutation(STUDENT_REGISTER);
-    useEffect(() => {
-        console.log(state, setState);
-    }, []);
     const onRegisterHandler = async (values: IValue) => {
         const res = await register({
             variables: {

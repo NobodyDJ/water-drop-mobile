@@ -8,8 +8,10 @@ export const useUploadOSS = () => {
 
     const uploadHandler = async (file: File) => {
         const formData = new FormData();
-        const key = `images/${file.name}`;
-        const result = data.getOSSInfo
+        const suffix = file.name.slice(file.name.lastIndexOf('.'));
+        const filename = Date.now() + suffix;
+        const key = `images/${filename}`;
+        const result = data.getOSSInfo;
         formData.append('key', key);
         formData.append('policy', result.policy);
         formData.append('OSSAccessKeyId', result.accessId);
@@ -20,8 +22,6 @@ export const useUploadOSS = () => {
             method: 'POST',
             body: formData
         })
-        console.log('res', res);
-        console.log(res.url + key);
         return { url: res.url + key };
     }
     return uploadHandler

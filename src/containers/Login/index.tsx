@@ -10,6 +10,7 @@ import { STUDENT_LOGIN } from '@/graphql/user';
 import { useMutation } from '@apollo/client';
 import md5 from 'md5';
 import { showFail, showSuccess } from '@/utils';
+import { AUTH_TOKEN } from '@/utils/contansts';
 
 /**
 *   登录
@@ -34,6 +35,7 @@ const Login = () => {
         })
         if (res.data.studentLogin.code === 200) {
             showSuccess(res.data.studentLogin.message);
+            localStorage.setItem(AUTH_TOKEN, res.data.studentLogin.data);
             nav('/');
             return;
           }
