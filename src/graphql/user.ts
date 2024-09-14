@@ -34,8 +34,8 @@ query getStudentInfo{
 `
 
 export const COMMIT_STUDENT_INFO = gql`
-mutation commitStudentInfo($id: String!, $params: StudentInput!){
-  commitStudentInfo(id: $id, params: $params){
+mutation commitStudentInfo($params: StudentInput!){
+  commitStudentInfo(params: $params){
     code
     message
   }

@@ -43,7 +43,6 @@ const My = () => {
         const res = await commit(
             {
                 variables: {
-                    id: store.id,
                     params: {
                         ...values,
                         avatar: values.avatar[0]?.url,
