@@ -20,12 +20,12 @@ export const useGetStudent = () => {
     const { setStore } = useUserContext();
     const location = useLocation();
     const nav = useNavigate()
-    const { loading, refetch } = useQuery<{ getStudentInfo: IStudent  }>(GET_STUDENT_INFO, {
+    const { loading, refetch } = useQuery<{ getStudentInfo: { data: IStudent }  }>(GET_STUDENT_INFO, {
         notifyOnNetworkStatusChange: true,
         onCompleted: (data) => {
             console.log('data', data);
             if (data.getStudentInfo) {
-                const { id, name, tel, desc, avatar } = data.getStudentInfo;
+                const { id, name, tel, desc, avatar } = data.getStudentInfo.data;
                 setStore({
                     id, name, tel, desc, avatar, refetchHandler: refetch
                 });

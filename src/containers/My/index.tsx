@@ -25,7 +25,7 @@ const My = () => {
                 url: store.avatar,
             }],
         });
-    }, [store]);
+    }, [form, store]);
 
     // 自定义手机号校验规则
     const validatePhoneNumber = (_: unknown, value: string) => {

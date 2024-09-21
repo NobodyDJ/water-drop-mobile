@@ -24,11 +24,14 @@ mutation studentLogin($account: String!, $password: String!) {
 export const GET_STUDENT_INFO = gql`
 query getStudentInfo{
   getStudentInfo{
-    name
-    id
-    avatar
-    tel
-    account
+    code
+    message
+    data {
+      name
+      id
+      avatar
+      tel
+    }
   }
 }
 `
