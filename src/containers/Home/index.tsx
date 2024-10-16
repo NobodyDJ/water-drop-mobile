@@ -1,20 +1,26 @@
 import style from './index.module.less';
-import { Button } from 'antd-mobile';
-import { useNavigate } from 'react-router-dom';
+import { SearchBar } from 'antd-mobile';
+import TypeSelect from './components/TypeSelect';
 
 /**
-*
+*   首页
 */
 const Home = () => {
-    const nav = useNavigate();
+    const onSearchHandler = () => {
+
+    };
+    
+    const onTypeChangeHandler = (key: string) => {
+        console.log('key', key);
+    };
+    
     return (
         <div className={style.container}>
-            <Button onClick={() => {
-                nav('/my');
-            }}
-            >
-                去编辑个人信息
-            </Button>
+            <SearchBar
+                placeholder="搜索课程试试"
+                onSearch={onSearchHandler}
+            />
+            <TypeSelect onChange={onTypeChangeHandler} />
         </div>
     );
 };
