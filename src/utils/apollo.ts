@@ -2,7 +2,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { AUTH_TOKEN } from "./contansts";
 import { setContext } from '@apollo/client/link/context';
 const httpLink = createHttpLink({
-    uri: '//localhost:3000/graphql',
+    uri: `http://${window.location.hostname}:3000/graphql`,
 });
 
 // 每次请求时候携带token信息
@@ -20,5 +20,7 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache(), // 缓存查询结果
+    cache: new InMemoryCache({
+      addTypename: false,
+    }), // 缓存查询结果
 })

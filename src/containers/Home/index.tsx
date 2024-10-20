@@ -1,17 +1,21 @@
 import style from './index.module.less';
 import { SearchBar } from 'antd-mobile';
 import TypeSelect from './components/TypeSelect';
+import ProductList from './components/ProductList';
+import { useState } from 'react';
 
 /**
 *   首页
 */
 const Home = () => {
-    const onSearchHandler = () => {
-
+    const [name, setName] = useState('');
+    const [type, setType] = useState('');
+    const onSearchHandler = (val: string) => {
+        setName(val);
     };
     
     const onTypeChangeHandler = (key: string) => {
-        console.log('key', key);
+        setType(key);
     };
     
     return (
@@ -21,6 +25,7 @@ const Home = () => {
                 onSearch={onSearchHandler}
             />
             <TypeSelect onChange={onTypeChangeHandler} />
+            <ProductList name={name} type={type}/>
         </div>
     );
 };
