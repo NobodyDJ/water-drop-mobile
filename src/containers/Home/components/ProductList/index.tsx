@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useProducts } from '@/services/product';
-import { ErrorBlock, Grid, PullToRefresh } from 'antd-mobile';
+import { ErrorBlock, Grid, PullToRefresh, InfiniteScroll } from 'antd-mobile';
 import ProductCard from '../ProductCard';
 import style from './index.module.less';
 
@@ -19,7 +19,7 @@ const ProductList = (
   }:IProps
 ) => {
   const [state, setState] = useState();
-  const { data, onRefresh  } = useProducts(name, type);
+  const { data, onRefresh, hasMore, loadMore  } = useProducts(name, type);
   useEffect(() => {
     console.log(state, setState);
   }, []);
@@ -39,6 +39,7 @@ const ProductList = (
         }
         </Grid>
       </PullToRefresh>
+      <InfiniteScroll hasMore={hasMore} loadMore={loadMore} />
     </div>
   );
 };
