@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import md5 from 'md5';
 import { showFail, showSuccess } from '@/utils';
 import { AUTH_TOKEN } from '@/utils/contansts';
+import { useUserContext } from '@/hooks/userHooks';
 
 /**
 *   登录
@@ -25,6 +26,7 @@ const Login = () => {
     const [form] = Form.useForm();
     // 参数1执行突变，参数2选项如error loading data
     const [login, { loading }] = useMutation(STUDENT_LOGIN);
+    const { store } = useUserContext();
     const nav = useNavigate();
     const loginHandler = async (values: IValue) => {
         const res = await login({
@@ -34,13 +36,14 @@ const Login = () => {
             }
         })
         if (res.data.studentLogin.code === 200) {
+            store.refetchHandler();
             showSuccess(res.data.studentLogin.message);
             localStorage.setItem(AUTH_TOKEN, res.data.studentLogin.data);
             nav('/');
             return;
-          }
-          const data = res.data.studentLogin;
-          showFail(data);
+        }
+        const data = res.data.studentLogin;
+        showFail(data);
     }
     return (
         <div className={style.container}>
