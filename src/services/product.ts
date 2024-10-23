@@ -5,6 +5,17 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import { Toast } from 'antd-mobile';
 import { useEffect, useRef, useState } from 'react';
 
+// 获取当前定位
+const getPosition = () => new Promise<{ latitude: number; longitude: number }>((r) => {
+  navigator.geolocation.getCurrentPosition((pos) => {
+    const { latitude, longitude } = pos.coords;
+    console.log(latitude, longitude);
+    r({ latitude, longitude });
+  }, () => {
+    r({ latitude: 0, longitude: 0 });
+  });
+});
+
 export const useProductTypes = () => {
   const { data, loading } = useQuery<TProductTypeQuery>(GET_PRODUCT_TYPES);
 
@@ -33,10 +44,16 @@ export const useProducts = (
       icon: 'loading',
       content: '加载中…',
     })
+    const {
+      latitude,
+      longitude,
+    } = await getPosition();
     const res = await get({
       fetchPolicy: 'network-only',
       variables: {
         type: type === DEFAULT_TYPE ? '' : type,
+        latitude,
+        longitude,
         page: {
           pageNum,
           pageSize: DEFAULT_PAGE_SIZE
