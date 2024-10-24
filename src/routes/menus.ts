@@ -13,6 +13,7 @@ interface IRoute {
 export const ROUTE_KEY = {
   HOME: 'home',
   MY: 'my',
+  ORG_INFO: 'OrgInfo',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -30,6 +31,11 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     isMenu: true,
     hideHeader: false
   },
+  [ROUTE_KEY.ORG_INFO]: {
+    path: 'orgInfo/:id',
+    name: '门店详情',
+    isMenu: false,
+  }
 };
 
 export const routes = Object.keys(ROUTE_CONFIG).map((key) => ({ ...ROUTE_CONFIG[key], key }));

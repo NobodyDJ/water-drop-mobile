@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-
 import { Image } from 'antd-mobile';
 import { IProduct } from '@/utils/types';
 import style from './index.module.less';
+import { useGoTo } from '@/hooks';
+import { ROUTE_KEY } from '@/routes/menus';
 
 interface IProps {
   data: IProduct
@@ -14,10 +14,12 @@ interface IProps {
 const ProductCard = ({
   data,
 }: IProps) => {
-  const [state, setState] = useState();
-  useEffect(() => {
-    console.log(state, setState);
-  }, []);
+  const { go } = useGoTo();
+  const goOrgInfo = (id: string) => {
+    go(ROUTE_KEY.ORG_INFO, {
+      id,
+    })
+  }
   return (
     <div className={style.container}>
       <Image
@@ -28,8 +30,9 @@ const ProductCard = ({
         <div className={style.name}>
           {data.name}
         </div>
+        {/* 点击门店查看门店详情 */}
         <div className={style.org}>
-          <span className={style.orgName}>
+          <span className={style.orgName} onClick={()=>goOrgInfo(data.org.id)}>
             {data.org.name}
           </span>
           <span className={style.distance}>
