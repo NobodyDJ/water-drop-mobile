@@ -41,3 +41,21 @@ export const GET_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_PRODUCTS_BY_ORG_ID = gql`
+  query getProductsByOrgIdForH5($orgId: String!) {
+    getProductsByOrgIdForH5(orgId: $orgId){
+      code
+      message
+      data {
+        id
+        name
+        coverUrl
+        desc
+        originalPrice
+        preferentialPrice
+        buyNumber
+      }
+    }
+  }
+`;
