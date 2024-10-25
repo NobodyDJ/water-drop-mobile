@@ -12,12 +12,15 @@ export const GET_ORG = gql`
                 id
                 orgFrontImg {
                     url
+                    id
                 }
                 orgRoomImg {
                     url
+                    id
                 }
                 orgOtherImg {
                     url
+                    id
                 }
                 logo
                 address
