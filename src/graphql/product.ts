@@ -59,3 +59,48 @@ export const GET_PRODUCTS_BY_ORG_ID = gql`
     }
   }
 `;
+
+export const GET_PRODUCT = gql`
+  query getProductInfo($id: String!) {
+    getProductInfo(id: $id){
+      code
+      message
+      data {
+        id
+        limitBuyNumber
+        name
+        type
+        coverUrl
+        bannerUrl
+        desc
+        status
+        originalPrice
+        stock
+        preferentialPrice
+        org {
+          logo
+          name
+        }
+        cards {
+          id
+          name
+          type
+          time
+          validityDay
+          course {
+            id
+            name
+            desc
+            group
+            baseAbility
+            limitNumber
+            duration
+            reserveInfo
+            refundInfo
+            otherInfo
+          }
+        }
+      }
+    }
+  }
+`;

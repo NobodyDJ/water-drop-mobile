@@ -14,6 +14,8 @@ export const ROUTE_KEY = {
   HOME: 'home',
   MY: 'my',
   ORG_INFO: 'OrgInfo',
+  PRODUCT_INFO: 'productInfo',
+  BUY: 'buy',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
@@ -35,7 +37,17 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     path: 'orgInfo/:id',
     name: '门店详情',
     isMenu: false,
-  }
+  },
+  [ROUTE_KEY.PRODUCT_INFO]: {
+    path: 'productInfo/:id',
+    name: '商品详情',
+    isMenu: false,
+  },
+  [ROUTE_KEY.BUY]: {
+    path: 'buy/:id',
+    name: '购买信息',
+    isMenu: false,
+  },
 };
 
 export const routes = Object.keys(ROUTE_CONFIG).map((key) => ({ ...ROUTE_CONFIG[key], key }));

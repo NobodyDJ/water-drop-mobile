@@ -15,11 +15,12 @@ const ProductCard = ({
   data,
 }: IProps) => {
   const { go } = useGoTo();
-  const goOrgInfo = (id: string) => {
+  const goOrgInfo = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
     go(ROUTE_KEY.ORG_INFO, {
       id,
-    })
-  }
+    });
+  };
   return (
     <div className={style.container}>
       <Image
@@ -32,7 +33,7 @@ const ProductCard = ({
         </div>
         {/* 点击门店查看门店详情 */}
         <div className={style.org}>
-          <span className={style.orgName} onClick={()=>goOrgInfo(data.org.id)}>
+          <span className={style.orgName} onClick={(e) => goOrgInfo(data.org.id, e)}>
             {data.org.name}
           </span>
           <span className={style.distance}>

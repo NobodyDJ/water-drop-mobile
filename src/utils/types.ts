@@ -86,7 +86,38 @@ export interface IProduct {
   displayType: string;
   distance?: string;
   org: IOrganization;
+  cards?: ICard[];
 }
 type TBaseQuery<T> = { [key: string]: { __typename?: 'Query', data: T, page: IPage } };
 export type TProductTypeQuery = TBaseQuery<IProductType[]>;
 export type TProductsQuery = TBaseQuery<IProduct[]>;
+export type TProductQuery = TBaseQuery<IProduct>;
+/**
+ * 课程类型
+ */
+export interface ICourse {
+  id: string;
+  name: string; // 标题
+  desc?: string;
+  group?: string; // 适龄人群
+  baseAbility?: string;
+  limitNumber: number; // 限制人数
+  duration: number; // 持续时长
+  reserveInfo?: string;
+  refundInfo?: string;
+  otherInfo?: string;
+}
+
+/**
+ * 消费卡
+ */
+export interface ICard {
+  id: string;
+  name: string;
+  type: string;
+  time: number;
+  validityDay: number;
+  course: ICourse;
+}
+
+export type TCourse = ICourse & { cardName: string };
