@@ -122,3 +122,15 @@ export interface ICard {
 }
 
 export type TCourse = ICourse & { cardName: string };
+
+export interface IWxConfig {
+  appId: string;
+  timeStamp: string;
+  nonceStr: string;
+  package: string;
+  signType: string;
+  paySign: string;
+}
+
+export type TWxConfigQuery = TBaseQuery<IWxConfig>;
+  
