@@ -19,6 +19,7 @@ export interface IStudent {
     avatar: string;
     refetchHandler?: () => void;
     currentOrg?: string;
+    openid?: string
 }
 
 export interface IStore{

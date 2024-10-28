@@ -25,9 +25,9 @@ export const useGetStudent = () => {
         onCompleted: (data) => {
             console.log('data', data);
             if (data.getStudentInfo) {
-                const { id, name, tel, desc, avatar } = data.getStudentInfo.data;
+                const { id, name, tel, desc, avatar, openid } = data.getStudentInfo.data;
                 setStore({
-                    id, name, tel, desc, avatar, refetchHandler: refetch
+                    id, name, tel, desc, avatar, refetchHandler: refetch, openid
                 });
                 // 确保登录之后，不再跳转到登录页面
                 if (location.pathname.startsWith('/login')) {

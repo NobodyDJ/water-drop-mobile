@@ -31,6 +31,7 @@ query getStudentInfo{
       id
       avatar
       tel
+      openid
     }
   }
 }
