@@ -5,11 +5,12 @@ import { useMutation } from '@apollo/client';
 export const useWxpayConfig = () => {
   const [get, { loading }] = useMutation<TWxConfigQuery>(GET_WXPAY_CONFIG);
 
-  const getHandler = async (productId: string, amount: number) => {
+  const getHandler = async (productId: string, quantity: number, amount: number) => {
     const res = await get({
       variables: {
         productId,
         amount,
+        quantity
       },
     });
 

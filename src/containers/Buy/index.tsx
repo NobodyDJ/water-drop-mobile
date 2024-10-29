@@ -7,10 +7,10 @@ import { useUserContext } from '@/hooks/userHooks';
 import { useWxpayConfig } from '@/services/order';
 import style from './index.module.less';
 import FailResult from './components/FailResult';
-import SuccessResult from './components/SucccessResult';
+import SuccessResult from './components/SuccessResult';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const { WeixinJSBridge } = window as any; // 校验当前是否为微信环境
+const { WeixinJSBridge } = window as any;
 
 /**
 * 购买商品信息
@@ -19,22 +19,19 @@ const Buy = () => {
   const { id } = useParams();
   const { data } = useProductInfo(id || '');
   const [count, setCount] = useState<number>(1);
-  const { store } = useUserContext();
   const [showResult, setShowResult] = useState({
     showSuccess: false,
     showFail: false,
   });
+  const { store } = useUserContext();
   const { getWxConfig } = useWxpayConfig();
-
-  if (!data) {
-    return null;
-  }
 
   const buyHandler = async () => {
     if (!store.openid) {
       window.location.href = `/wx/login?userId=${store.id}&url=${window.location.href}`;
       return;
     }
+
     if (!data || !id) {
       Toast.show({
         content: '没有获取到商品信息',
@@ -43,8 +40,12 @@ const Buy = () => {
     }
 
     if (typeof WeixinJSBridge !== 'undefined') {
-       const wxConfig = await getWxConfig(id, data.preferentialPrice * count);
-       WeixinJSBridge.invoke(
+      const wxConfig = await getWxConfig(
+        id,
+        count,
+        data.preferentialPrice * count,
+      );
+      WeixinJSBridge.invoke(
         'getBrandWCPayRequest',
         {
           ...wxConfig,
@@ -64,14 +65,18 @@ const Buy = () => {
             showFail: true,
           });
         },
-       );
-     } else {
-       Toast.show({
+      );
+    } else {
+      Toast.show({
         content: '请在微信中打开该页面',
-       });
-       const wxConfig = await getWxConfig(id, data.preferentialPrice * count);
-       console.log('wxConfig', wxConfig);
-       setShowResult({
+      });
+      const wxConfig = await getWxConfig(
+        id,
+        count,
+        data.preferentialPrice * count,
+      );
+      console.log('wxConfig', wxConfig);
+      setShowResult({
         showSuccess: true,
         showFail: false,
       });
@@ -99,7 +104,6 @@ const Buy = () => {
       />
     );
   }
-
   return (
     <div className={style.container}>
       <div className={style.organization}>
