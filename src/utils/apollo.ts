@@ -1,5 +1,5 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { AUTH_TOKEN } from "./contansts";
+import { AUTH_TOKEN } from "./constants";
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { Toast } from 'antd-mobile';

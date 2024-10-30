@@ -1,7 +1,7 @@
 import { useProductTypes } from '@/services/product';
 import { SpinLoading, Tabs } from 'antd-mobile';
 import style from './index.module.less';
-import { DEFAULT_TYPE } from '@/utils/contansts';
+import { DEFAULT_TYPE } from '@/utils/constants';
 
 interface IProps {
   onChange: (key: string) => void;

@@ -10,7 +10,7 @@ import { STUDENT_LOGIN } from '@/graphql/user';
 import { useMutation } from '@apollo/client';
 import md5 from 'md5';
 import { showFail, showSuccess } from '@/utils';
-import { AUTH_TOKEN } from '@/utils/contansts';
+import { AUTH_TOKEN } from '@/utils/constants';
 import { useUserContext } from '@/hooks/userHooks';
 
 /**
