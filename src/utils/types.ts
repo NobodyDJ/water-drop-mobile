@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+type TBaseQuery<T> = { [key: string]: { __typename?: 'Query', data: T, page: IPage } };
 export interface IPage {
   pageNum: number;
   pageSize: number;
@@ -62,9 +63,9 @@ export interface IOrganization {
 export type TBaseOrganization = Partial<IOrganization>;
 
 // __typename?: 'Query'：可选字段，表示类型名为 'Query'。这是 GraphQL 查询中特有的类型标识符，用来明确查询返回的类型。
-export type TOrgsQuery = { [key: string]: { __typename?: 'Query', data: IOrganization[], page: IPage } };
+export type TOrgsQuery = TBaseQuery<IOrganization[]>
 
-export type TOrgQuery = { [key: string]: { __typename?: 'Query', data: IOrganization } };
+export type TOrgQuery = TBaseQuery<IOrganization>;
 
 /**
  * 商品类型
@@ -89,7 +90,7 @@ export interface IProduct {
   org: IOrganization;
   cards?: ICard[];
 }
-type TBaseQuery<T> = { [key: string]: { __typename?: 'Query', data: T, page: IPage } };
+
 export type TProductTypeQuery = TBaseQuery<IProductType[]>;
 export type TProductsQuery = TBaseQuery<IProduct[]>;
 export type TProductQuery = TBaseQuery<IProduct>;
@@ -133,4 +134,19 @@ export interface IWxConfig {
 }
 
 export type TWxConfigQuery = TBaseQuery<IWxConfig>;
-  
+
+/**
+ * 个人消费卡
+ */
+export interface ICardRecord {
+  id: string;
+  startTime: string;
+  endTime: string;
+  buyTime: string;
+  residueTime: number; // 剩余次数
+  status: string;
+  card:ICard;
+  org: IOrganization;
+}
+
+export type TCardRecordsQuery = TBaseQuery<ICardRecord[]>;
