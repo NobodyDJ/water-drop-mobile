@@ -13,6 +13,9 @@ const getPosition = () => new Promise<{ latitude: number; longitude: number }>((
     r({ latitude, longitude });
   }, () => {
     r({ latitude: 0, longitude: 0 });
+  }, {
+    timeout: 3000, // 请求接口的超时时间
+    maximumAge: 30 * 60 * 1000 // 设置半个小时
   });
 });
 

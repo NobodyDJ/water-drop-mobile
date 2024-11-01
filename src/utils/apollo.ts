@@ -3,8 +3,15 @@ import { AUTH_TOKEN } from "./constants";
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { Toast } from 'antd-mobile';
+
+// 服务器地址部署区域
+let uri = `http://${window.location.hostname}:3000/graphql`;
+if (process.env.NODE_ENV === 'production') {
+  uri = ''; // 这里填写相关线上地址 
+}
+
 const httpLink = createHttpLink({
-    uri: `http://${window.location.hostname}:3000/graphql`,
+    uri,
 });
 
 const errorLink = onError(({
@@ -47,8 +54,13 @@ const authLink = setContext((_, { headers }) => {
 })
 
 export const client = new ApolloClient({
-    link: errorLink.concat(authLink.concat(httpLink)),
-    cache: new InMemoryCache({
-      addTypename: false,
-    }), // 缓存查询结果
+  link: errorLink.concat(authLink.concat(httpLink)),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache', // 非缓存协议
+    }
+  },
+  cache: new InMemoryCache({
+    addTypename: false,
+  }), // 缓存查询结果
 })
