@@ -56,6 +56,7 @@ export interface IOrganization {
   tel?: string;
   longitude?: string;
   latitude?: string;
+  courses?: ICourse[];
 }
 
 // IOrganization中的所有属性均是可选属性
@@ -108,6 +109,8 @@ export interface ICourse {
   reserveInfo?: string;
   refundInfo?: string;
   otherInfo?: string;
+  coverUrl?: string;
+  teachers?: ITeacher[]; 
 }
 
 /**
@@ -150,3 +153,23 @@ export interface ICardRecord {
 }
 
 export type TCardRecordsQuery = TBaseQuery<ICardRecord[]>;
+
+/**
+ * 教师
+ */
+export interface ITeacher {
+  id: string;
+  name: string;
+  photoUrl: string;
+}
+
+// 课程表
+export interface ISchedule {
+  id: string;
+  startTime: string;
+  endTime: string;
+  buyTime: string;
+  schoolDay: string; // 上课日期
+  course: ICourse;
+  teacher: ITeacher;
+}
