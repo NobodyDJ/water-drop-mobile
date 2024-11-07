@@ -20,3 +20,20 @@ query getCanSubscribeCourses {
   }
 }
 `;
+
+export const GET_SCHEDULES_BY_COURSE = gql`
+query getSchedulesByCourse($courseId: String!){
+  getSchedulesByCourse(courseId: $courseId){
+    code
+    message
+    data {
+      id
+      schoolDay
+      startTime
+      endTime
+    }
+    page {
+      total
+    }
+  }
+}`;

@@ -3,18 +3,17 @@ import { List, Image, Button } from 'antd-mobile';
 import { ICourse } from '@/utils/types';
 
 interface IProps{
-    dataSource: ICourse[]
+    dataSource: ICourse[];
+    onSubscribe: (id: string) => void;
 }
 
 /**
 *   课程列表
 */
 const CourseList = ({
-    dataSource
+    dataSource,
+    onSubscribe
 }: IProps) => {
-    const subscribeHandler = (id: string) => {
-      console.log(id);
-    };
     return (
         <div className={style.container}>
             <List>
@@ -36,7 +35,7 @@ const CourseList = ({
                                 <Button
                                   fill="none"
                                   color="primary"
-                                  onClick={() => subscribeHandler(item.id)}
+                                  onClick={() => onSubscribe(item.id)}
                                 >
                                   预约
                                 </Button>

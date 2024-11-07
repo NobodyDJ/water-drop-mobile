@@ -173,3 +173,5 @@ export interface ISchedule {
   course: ICourse;
   teacher: ITeacher;
 }
+
+export type TSchedulesQuery = TBaseQuery<ISchedule[]>;
