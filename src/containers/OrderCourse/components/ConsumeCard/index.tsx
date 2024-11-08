@@ -22,7 +22,7 @@ const ConsumeCard = ({
     }, []);
     return (
         <div className={style.container}>
-            <Space>
+            <Space justify="between" block>
                 <span>
                     {
                         dataSource.card.type === CARD_TYPE.TIME[0] &&

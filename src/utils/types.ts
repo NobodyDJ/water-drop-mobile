@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-type TBaseQuery<T> = { [key: string]: { __typename?: 'Query', data: T, page: IPage } };
+import { SCHEDULE_STATUS } from "./constants";
+
+export type TBaseQuery<T = null> = { [key: string]: { __typename?: 'Query', data: T, page: IPage, code: number, message: string } };
 export interface IPage {
   pageNum: number;
   pageSize: number;
@@ -9,7 +11,7 @@ export interface IPage {
 
 
 export interface IPropChild{
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
 export interface IStudent {
@@ -175,3 +177,16 @@ export interface ISchedule {
 }
 
 export type TSchedulesQuery = TBaseQuery<ISchedule[]>;
+
+export interface IScheduleRecord {
+  id: string;
+  subscribeTime: string;
+  tel: string;
+  status: keyof typeof SCHEDULE_STATUS;
+  course: ICourse;
+  student: IStudent;
+  schedule: ISchedule;
+  org: IOrganization;
+}
+
+export type TScheduleRecordsQuery = TBaseQuery<IScheduleRecord[]>;
