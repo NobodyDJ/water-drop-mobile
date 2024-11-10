@@ -54,6 +54,7 @@ export const useProducts = (
     const res = await get({
       fetchPolicy: 'network-only',
       variables: {
+        name,
         type: type === DEFAULT_TYPE ? '' : type,
         latitude,
         longitude,

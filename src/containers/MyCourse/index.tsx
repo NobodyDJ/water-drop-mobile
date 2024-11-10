@@ -26,7 +26,7 @@ if (loading) {
 // 取消预约的课程，必须是未开始的课程才能取消
 const cancelSubscribeHandler = async (id: string) => {
     const result = await Modal.confirm({
-    content: '确定要取消预约吗？一旦取消不能重复预约了！',
+        content: '确定要取消预约吗？一旦取消不能重复预约了！',
     });
     if (result) {
     const res = await cancel(id);
