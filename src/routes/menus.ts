@@ -32,7 +32,7 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   },
   [ROUTE_KEY.MY]: {
     path: 'my',
-    name: '个人信息',
+    name: '我的',
     icon: mySvg,
     isMenu: true,
     hideHeader: false

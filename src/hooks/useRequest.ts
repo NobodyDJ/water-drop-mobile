@@ -6,7 +6,7 @@ import useMount from "./useMount";
  */
 
 interface IOptions {
-    params: Record<string, string>;
+    params?: Record<string, string>;
     manual?: boolean;
     onSuccess?: (res: unknown) => void;// 用于异步请求
     onError?: (res: unknown) => void;
@@ -15,7 +15,7 @@ interface IOptions {
 
 // Record<string, string> 是一个key 和 value 都是string的对象。
 const useRequest = (
-    service: (params: Record<string, string>) => Promise<unknown>,
+    service: (params?: Record<string, string>) => Promise<unknown>,
     options:IOptions
 ) => {
     const [data, setData] = useState<unknown>();
@@ -41,7 +41,7 @@ const useRequest = (
     useMount(() => {
         // 首次挂载该组件回进行初始化
         if (!options.manual) {
-            init(options.params);
+            init(options.params || {});
         }
     })
 
