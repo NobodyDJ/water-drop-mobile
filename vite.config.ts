@@ -10,6 +10,9 @@ export default defineConfig({
     port: 3333,
     open: true, // 自动打开浏览器
     cors: true, // 打开跨域
+    proxy: {
+      '/graphql': 'http://localhost:3000' // 代理
+    }
   },
   plugins: [react(), eslint()],
   resolve: {

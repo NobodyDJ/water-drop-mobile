@@ -5,7 +5,8 @@ import { onError } from '@apollo/client/link/error';
 import { Toast } from 'antd-mobile';
 
 // 服务器地址部署区域
-let uri = `http://${window.location.hostname}:3000/graphql`;
+// let uri = `http://${window.location.hostname}:3000/graphql`;
+let uri = '/graphql'
 if (process.env.NODE_ENV === 'production') {
   uri = ''; // 这里填写相关线上地址 
 }

@@ -31,7 +31,7 @@ export const useGoTo = () => {
       // /page/:id params: { id: 1 } => /page/1
       const url = route.path.replace(
         /\/:(\w+)/g,
-        (exp: string, exp1: string) => `/${params[exp1]}`,
+        (_exp: string, exp1: string) => `/${params[exp1]}`,
       );
       nav(`/${url}`);
     }
