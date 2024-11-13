@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
-import eslint from 'vite-plugin-eslint';
+// import eslint from 'vite-plugin-eslint'; //这个eslint规则是给脚手架使用的，保证有eslint语法错误时，项目无法成功编译（可有可无）
 import path from 'path'
+// @ts-ignore
 import postCssPxToViewport from 'postcss-px-to-viewport';
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,7 +15,7 @@ export default defineConfig({
       '/graphql': 'http://localhost:3000' // 代理
     }
   },
-  plugins: [react(), eslint()],
+  plugins: [react()],
   resolve: {
     alias: [
       {
