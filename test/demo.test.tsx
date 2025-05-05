@@ -14,13 +14,14 @@ describe('测试', () => {
         const service = () => new Promise((r) => {
             r(true)
         });
-        // renderHook()用于测试需要在组件上运行的hooks
+        // renderHook()用于测试需要在组件上运行的hooks，相当于给useRequest这个hook提供了组件上下文的运营环境
         const { result } = renderHook(() => useRequest(service, {}));
         await waitFor(() => { }); // 异步等待函数
-        // 断言
+        // 断言，这里的current相当于指向ref组件
         expect(result.current.data).toBe(true);
     })
 
+    // MemoryRouter用于解决useLocation不在router环境下报错的问题
     it('组件测试', async () => {
         const { getByText } = render(
             <MemoryRouter>
